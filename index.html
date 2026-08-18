@@ -2,19 +2,88 @@
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0B0B0B" />
     <title>Suraj Sharma | Unity Game Developer</title>
     <meta name="description" content="Suraj Sharma — Unity Game Developer with 2.7+ years of experience in Mobile, Multiplayer, Web3 & Metaverse games." />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <meta property="og:image" content="https://bolt.new/static/og_default.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Suraj Sharma | Unity Game Developer" />
+    <meta property="og:description" content="Unity Game Developer with 2.7+ years of experience in Mobile, Multiplayer, Web3 & Metaverse games." />
+    <meta property="og:image" content="/favicon.svg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Suraj Sharma | Unity Game Developer" />
+    <meta name="twitter:description" content="Unity Game Developer — Mobile, Multiplayer, Web3 & Metaverse games." />
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      (function() {
+        function hideBolt() {
+          try {
+            function checkAndHide(el) {
+              if (el && el.textContent && el.textContent.trim() === 'Made in Bolt') {
+                var parent = el;
+                for (var j = 0; j < 5; j++) {
+                  if (parent.parentElement && parent.parentElement !== document.body && parent.parentElement !== document.documentElement) {
+                    parent = parent.parentElement;
+                  } else {
+                    break;
+                  }
+                }
+                if (parent) {
+                  parent.style.setProperty('display', 'none', 'important');
+                  parent.style.setProperty('visibility', 'hidden', 'important');
+                  parent.style.setProperty('opacity', '0', 'important');
+                  parent.style.setProperty('pointer-events', 'none', 'important');
+                }
+              }
+            }
+
+            function traverse(root) {
+              if (!root) return;
+              var elements = root.querySelectorAll('*');
+              for (var i = 0; i < elements.length; i++) {
+                var el = elements[i];
+                checkAndHide(el);
+                if (el.shadowRoot) {
+                  if (el.shadowRoot.textContent && el.shadowRoot.textContent.indexOf('Bolt') !== -1) {
+                    el.style.setProperty('display', 'none', 'important');
+                    el.style.setProperty('visibility', 'hidden', 'important');
+                  }
+                  traverse(el.shadowRoot);
+                }
+              }
+            }
+
+            traverse(document);
+
+            var selectors = [
+              'sb-badge', 'bolt-badge', 'stackblitz-badge',
+              '[class*="sb-badge"]', '[id*="sb-badge"]',
+              '[class*="bolt-badge"]', '[id*="bolt-badge"]',
+              '[class*="made-in-bolt"]', '[id*="made-in-bolt"]'
+            ];
+            for (var k = 0; k < selectors.length; k++) {
+              var badges = document.querySelectorAll(selectors[k]);
+              for (var m = 0; m < badges.length; m++) {
+                badges[m].style.setProperty('display', 'none', 'important');
+                badges[m].style.setProperty('visibility', 'hidden', 'important');
+                badges[m].style.setProperty('opacity', '0', 'important');
+              }
+            }
+          } catch(e) {}
+        }
+        hideBolt();
+        setInterval(hideBolt, 100);
+      })();
+    </script>
   </body>
 </html>
+
